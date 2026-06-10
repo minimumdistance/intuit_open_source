@@ -443,3 +443,50 @@ PR #2
 * Reviewed
 * Rejected
 * Closed
+
+
+## 18. Issues Creation and Resolution
+
+### Create Issue
+
+```
+curl \
+  -X POST \
+  -H "Authorization: token $DEV2_TOKEN" \
+  -H "Content-Type: application/json" \
+  http://localhost:3000/api/v1/repos/dev1/demo/issues \
+  -d '{
+        "title":"Bug in parser",
+        "body":"Reproduce by..."
+      }'
+```
+
+### List Issues
+
+```
+curl \
+  -H "Authorization: token $DEV1_TOKEN" \
+  http://localhost:3000/api/v1/repos/dev1/demo/issues
+```
+
+### Comment Issue
+
+```
+curl \
+  -X POST \
+  -H "Authorization: token $DEV1_TOKEN" \
+  -H "Content-Type: application/json" \
+  http://localhost:3000/api/v1/repos/dev1/demo/issues/1/comments \
+  -d '{"body":"Investigating"}'
+```
+
+### Close Issue
+
+```
+curl \
+  -X PATCH \
+  -H "Authorization: token $DEV1_TOKEN" \
+  -H "Content-Type: application/json" \
+  http://localhost:3000/api/v1/repos/dev1/demo/issues/1 \
+  -d '{"state":"closed"}'
+```
